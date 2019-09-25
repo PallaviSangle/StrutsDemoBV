@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<!-- works like controller -->
+<struts>
+	<package name="struts" extends="struts-default">
+		<interceptors>
+			<interceptor name="CustomInterceptor"
+				class="com.bv.interceptor.CustomInterceptor"></interceptor>
+			<interceptor name="CustomInterceptor1"
+				class="com.bv.interceptor.CustomInterceptor1"></interceptor>
+	
+	<interceptor-stack name="myStack">
+		<interceptor-ref name="CustomInterceptor" />
+	<interceptor-ref name="params" />
+	<!-- <interceptor-ref name="defaultStack" /> -->
+			<interceptor-ref name="logger" />
+			<interceptor-ref name="timer" />
+	
+	</interceptor-stack>
+	
+		</interceptors>
+		
+		
+<action name="login" class="com.bv.model.Registration">
+			<!-- <interceptor-ref name="CustomInterceptor" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="CustomInterceptor1" />
+			<interceptor-ref name="params" />
+			<interceptor-ref name="logger" />
+			<interceptor-ref name="timer" />
+			<interceptor-ref name="myStack" />
+       <interceptor-ref name="fileUpload">  
+                <param name="maximumSize">2097152</param>  
+        <param name="allowedTypes">  
+                    image/png,image/gif,image/jpeg
+                                </param>  
+            </interceptor-ref>   -->
+			
+			<interceptor-ref name="defaultStack"/>
+			<result name="input">Registration.jsp</result>
+			<result>Welcome.jsp</result>
+			<result name="error">Error.html</result>
+		</action>
+
+
+		<action name="success" class="com.bv.model.HelloAction">
+		<result>hello.jsp</result>
+			<interceptor-ref name="CustomInterceptor1" />
+					<interceptor-ref name="myStack" />
+			<!-- <interceptor-ref name="params" />
+			<interceptor-ref name="logger" />
+			<interceptor-ref name="timer" /> -->
+				</action>
+</package>
+</struts>
